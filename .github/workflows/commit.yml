@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Wait patiently
-        run: sleep $RANDOM
+        run: sleep $((RANDOM / 1000))
         
       - name: Get the date
         run: date > time.txt
