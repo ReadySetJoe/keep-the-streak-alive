@@ -1,0 +1,47 @@
+name: randomly-commit
+
+# Controls when the workflow will run
+on:
+  schedule:
+    - cron:  '*/15 15-18 * * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  commit:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+    - id: Roll dice
+      run: echo "PROCEED=$((RANDOM%10))" >> $GITHUB_ENV
+      shell: bash
+      
+    - if: env.PROCEED != '0'
+      name: Cancelling
+      uses: andymckay/cancel-action@0.2
+      
+    - if: env.PROCEED != '0'
+      name: Waiting for cancellation
+      run: sleep 60
+  
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v3
+
+    - name: Wait patiently
+      run: sleep $((RANDOM / 1000))
+      
+    - name: Get the date
+      run: date > time.txt
+
+    - name: Setup git config
+      run: |
+        git config user.name "$(git log -n 1 --pretty=format:%an)"
+        git config user.email "$(git log -n 1 --pretty=format:%ae)"
+
+    - name: Commit
+      run: |
+        git add time.txt
+        git commit -m "kept the streak alive :)"
+        git push origin main
