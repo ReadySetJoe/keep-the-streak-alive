@@ -3,7 +3,7 @@ name: commit
 # Controls when the workflow will run
 on:
   schedule:
-    - cron:  '0 12 * * *'
+    - cron:  '0 14 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -17,7 +17,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
+      - name: Wait patiently
+        run: sleep $RANDOM
+        
       - name: Get the date
         run: date > time.txt
 
@@ -29,5 +31,5 @@ jobs:
       - name: Commit
         run: |
           git add time.txt
-          git commit -m "new date commit"
+          git commit -m "kept the streak alive :)"
           git push origin main
