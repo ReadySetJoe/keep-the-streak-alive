@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - name: Roll dice
-      run: echo "PROCEED=$((RANDOM%10))" >> $GITHUB_ENV
+      run: echo "PROCEED=$((RANDOM%2))" >> $GITHUB_ENV
       shell: bash
       
     - if: env.PROCEED != '0'
