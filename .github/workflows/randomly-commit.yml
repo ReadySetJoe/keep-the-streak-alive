@@ -3,7 +3,7 @@ name: randomly-commit
 # Controls when the workflow will run
 on:
   schedule:
-    - cron:  '*/3 13-23 * * *'
+    - cron:  '*/3 * * * *'
 
 jobs:
   commit:
