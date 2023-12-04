@@ -3,7 +3,7 @@ name: randomly-commit
 # Controls when the workflow will run
 on:
   schedule:
-    - cron:  '*/15 13-16 * * *'
+    - cron:  '*/15 13-23 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
